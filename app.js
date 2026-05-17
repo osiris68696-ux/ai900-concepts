@@ -229,6 +229,12 @@ const concepts = [
   },
   {
     category: "五大 AI 核心領域",
+    name: "互動式語音回應系統",
+    english: "Interactive Voice Response / IVR",
+    description: "讓電話系統依使用者的語音或按鍵選項自動回應並路由通話。考題若問 IVR 功能，重點通常是根據語音或選單路由通話。"
+  },
+  {
+    category: "五大 AI 核心領域",
     name: "Azure Bot Service",
     english: "Azure Bot Service",
     description: "用來建立、連接、部署與管理聊天機器人的 Azure 服務，可部署到 Teams、LINE 等通道。"
@@ -793,6 +799,9 @@ function speakWithBritishSplitVoice(text) {
     const britishVoice = pickPreferredVoice() || pickVoiceByLang("en-GB", "en");
     const chineseVoice = pickVoiceByLang("zh-TW", "zh");
     const voiceName = britishVoice ? `${britishVoice.name} (${britishVoice.lang})` : "瀏覽器預設聲音";
+    const voiceNote = britishVoice && britishVoice.lang === "en-GB"
+      ? "已使用英國腔英文聲音"
+      : "此裝置沒有可用的 en-GB 英國腔聲音，已退回可用英文聲音";
 
     const speakOne = (content, voice, lang, onEnd) => {
       const utterance = new SpeechSynthesisUtterance(content);
@@ -811,7 +820,7 @@ function speakWithBritishSplitVoice(text) {
     };
 
     els.voiceStatus.textContent = "英國腔朗讀中";
-    els.feedback.textContent = `目前英文聲音：${voiceName}`;
+    els.feedback.textContent = `${voiceNote}：${voiceName}`;
 
     speakOne(englishPart, britishVoice, "en-GB", () => {
       if (runId !== speechRunId) {
