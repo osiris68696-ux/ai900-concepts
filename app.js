@@ -25,6 +25,30 @@ const concepts = [
   },
   {
     category: "AI 與機器學習生命週期",
+    name: "資料擷取",
+    english: "Data Ingestion",
+    description: "將資料從來源系統匯入機器學習流程的步驟，例如從資料庫、檔案或雲端儲存體取得資料。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "資料準備",
+    english: "Data Preparation",
+    description: "訓練前整理資料的階段，包含清理缺失值、移除異常或錯誤記錄、轉換欄位與合併資料集。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "缺失值處理",
+    english: "Missing Value Handling",
+    description: "處理資料中空白、缺漏或無效值的步驟，例如移除缺失值記錄或用合理值填補。屬於資料準備。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "合併資料集",
+    english: "Merge Datasets",
+    description: "將多個資料來源或資料表合併成訓練可用資料。屬於資料擷取與資料準備期間常見動作。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
     name: "訓練集",
     english: "Training Dataset",
     description: "給模型讀書與學習用的資料，用來讓模型找出特徵與標籤之間的規律。"
