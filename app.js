@@ -261,7 +261,19 @@ const concepts = [
     category: "五大 AI 核心領域",
     name: "Azure Bot Service",
     english: "Azure Bot Service",
-    description: "用來建立、連接、部署與管理聊天機器人的 Azure 服務，可部署到 Teams、LINE 等通道。"
+    description: "用來建立、連接、部署與管理聊天機器人的 Azure 服務，可部署到 Microsoft Teams、Cortana、Alexa、LINE 等通道。"
+  },
+  {
+    category: "五大 AI 核心領域",
+    name: "Bot 通道",
+    english: "Bot Channels",
+    description: "聊天機器人可發布到不同通道，例如 Microsoft Teams、Cortana、Amazon Alexa、網站聊天視窗或其他訊息平台。"
+  },
+  {
+    category: "五大 AI 核心領域",
+    name: "QnA Maker",
+    english: "QnA Maker",
+    description: "舊版常見的問答知識庫服務，用於從 FAQ 或文件建立問答。若題目重點是部署交談式 AI 到 Teams、Cortana、Alexa，通常選 Azure Bot Service。"
   },
   {
     category: "五大 AI 核心領域",
