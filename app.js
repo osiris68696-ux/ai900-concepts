@@ -415,6 +415,12 @@ const concepts = [
   },
   {
     category: "Azure ML 與 AI 服務工具箱",
+    name: "文字分析",
+    english: "Text Analytics",
+    description: "分析純文字內容的能力，例如情緒分析、關鍵片語擷取、實體辨識與語言偵測。它不是語音輸出功能。"
+  },
+  {
+    category: "Azure ML 與 AI 服務工具箱",
     name: "對話語言理解",
     english: "Conversational Language Understanding / CLU",
     description: "讓應用理解使用者語句中的意圖與實體，是 Azure AI Language 的常見能力。"
@@ -436,6 +442,12 @@ const concepts = [
     name: "文字轉語音",
     english: "Text to Speech / TTS",
     description: "將文字轉換成自然語音，是 Azure AI Speech 的核心能力之一。"
+  },
+  {
+    category: "Azure ML 與 AI 服務工具箱",
+    name: "類神經語音",
+    english: "Neural Voice",
+    description: "Azure AI Speech 中用於產生自然、接近真人語音的文字轉語音能力。看到自然語音、旁白或語音輸出，可聯想到 Neural Voice。"
   },
   {
     category: "Azure ML 與 AI 服務工具箱",
