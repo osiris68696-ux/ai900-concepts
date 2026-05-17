@@ -43,6 +43,48 @@ const concepts = [
   },
   {
     category: "AI 與機器學習生命週期",
+    name: "混淆矩陣",
+    english: "Confusion Matrix",
+    description: "用 0 和 1 的網格或表格顯示分類模型的預測結果與實際正負值，用來看 True Positive、False Positive、True Negative、False Negative。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "ROC 曲線",
+    english: "ROC Curve",
+    description: "用來評估二元分類模型在不同閾值下的表現，通常比較真正率與假正率。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "AUC 計量",
+    english: "AUC Metric",
+    description: "ROC 曲線下的面積，用來衡量分類模型整體區分正負類別的能力，數值越高通常代表模型越好。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "閾值",
+    english: "Threshold",
+    description: "分類模型將機率轉成類別的切分點，例如機率大於 0.5 判定為正類別。調整閾值會影響精確率與召回率。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "正確率",
+    english: "Accuracy",
+    description: "模型預測正確的比例，適合類別分布較平均的分類問題。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "精確率",
+    english: "Precision",
+    description: "模型預測為正類別的結果中，實際也為正類別的比例。重點是減少假陽性。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "召回率",
+    english: "Recall",
+    description: "所有實際正類別中，被模型成功找出來的比例。重點是減少假陰性。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
     name: "模型",
     english: "Model",
     description: "從訓練資料學到的規則或模式，可用來對新資料進行預測。"
