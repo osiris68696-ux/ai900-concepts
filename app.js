@@ -546,7 +546,6 @@ const els = {
   conceptList: document.querySelector("#conceptList"),
   speakCurrentBtn: document.querySelector("#speakCurrentBtn"),
   stopBtn: document.querySelector("#stopBtn"),
-  voiceSelect: document.querySelector("#voiceSelect"),
   feedback: document.querySelector("#feedback"),
   topicList: document.querySelector("#topicList")
 };
@@ -581,7 +580,7 @@ function renderConcepts() {
 }
 
 function speechText(item) {
-  return `${item.english}。${item.name}。${item.description}`;
+  return `${item.english}. ${item.name}。${item.description}`;
 }
 
 function speak(text) {
@@ -636,7 +635,7 @@ els.stopBtn.addEventListener("click", () => {
 });
 
 function speechText(item) {
-  return `${item.english}。${item.name}。${item.description}`;
+  return `${item.english}|||${item.name}。${item.description}`;
 }
 
 function stopSpeech(message = "已停止朗讀。") {
@@ -651,7 +650,7 @@ function stopSpeech(message = "已停止朗讀。") {
     window.speechSynthesis.cancel();
   }
 
-  els.voiceStatus.textContent = "溫柔動畫感";
+  els.voiceStatus.textContent = "英國腔朗讀";
   els.feedback.textContent = message;
 }
 
@@ -702,62 +701,12 @@ function pickPreferredVoice() {
   }
 
   const voices = window.speechSynthesis.getVoices();
-  const selectedVoiceName = localStorage.getItem("ai900VoiceName");
-  if (selectedVoiceName) {
-    const selectedVoice = voices.find((voice) => voice.name === selectedVoiceName);
-    if (selectedVoice) {
-      return selectedVoice;
-    }
-  }
+  const preferredNames = ["Daniel", "George", "Ryan", "Sonia", "Libby", "Serena", "Microsoft George", "Microsoft Ryan", "Google UK English"];
 
-  const preferredNames = [
-    "HsiaoChen",
-    "Hanhan",
-    "Yating",
-    "Xiaoxiao",
-    "Xiaoyi",
-    "Microsoft HsiaoChen",
-    "Microsoft Hanhan",
-    "Microsoft Yating",
-    "Microsoft Xiaoxiao",
-    "Google 國語",
-    "Google 普通话",
-    "Google 中文"
-  ];
-
-  return voices.find((voice) => preferredNames.some((name) => voice.name.includes(name)))
-    || voices.find((voice) => voice.lang === "zh-TW")
-    || voices.find((voice) => voice.lang === "zh-CN")
-    || voices.find((voice) => voice.lang.startsWith("zh"))
+  return voices.find((voice) => voice.lang === "en-GB" && preferredNames.some((name) => voice.name.includes(name)))
+    || voices.find((voice) => voice.lang === "en-GB")
+    || voices.find((voice) => voice.lang.startsWith("en"))
     || null;
-}
-
-function populateVoiceSelect() {
-  if (!("speechSynthesis" in window) || !els.voiceSelect) {
-    return;
-  }
-
-  const voices = window.speechSynthesis.getVoices();
-  const selectedVoiceName = localStorage.getItem("ai900VoiceName") || "";
-  const usefulVoices = voices
-    .filter((voice) => voice.lang.startsWith("zh") || /Chinese|Mandarin|Taiwan|Hong Kong|中文|國語|普通话/i.test(voice.name))
-    .sort((a, b) => a.lang.localeCompare(b.lang) || a.name.localeCompare(b.name));
-
-  els.voiceSelect.innerHTML = '<option value="">自動選擇中文女聲</option>';
-  usefulVoices.forEach((voice) => {
-    const option = document.createElement("option");
-    option.value = voice.name;
-    option.textContent = `${voice.name} (${voice.lang})`;
-    option.selected = voice.name === selectedVoiceName;
-    els.voiceSelect.appendChild(option);
-  });
-
-  if (!selectedVoiceName) {
-    const autoVoice = pickPreferredVoice();
-    if (autoVoice) {
-      els.voiceSelect.options[0].textContent = `自動：${autoVoice.name} (${autoVoice.lang})`;
-    }
-  }
 }
 
 const previousSpeak = speak;
@@ -784,24 +733,24 @@ function speakWithBrightVoice(text) {
       utterance.voice = preferredVoice;
       utterance.lang = preferredVoice.lang;
     } else {
-      utterance.lang = "zh-TW";
+      utterance.lang = "en-GB";
     }
-    utterance.rate = 0.92;
-    utterance.pitch = 1.65;
+    utterance.rate = 0.9;
+    utterance.pitch = 1;
     utterance.volume = 1;
     utterance.onstart = () => {
       if (runId === speechRunId) {
-        els.voiceStatus.textContent = "溫柔動畫感朗讀中";
+        els.voiceStatus.textContent = "英國腔朗讀中";
       }
     };
     utterance.onend = () => {
       if (runId === speechRunId) {
-        els.voiceStatus.textContent = "溫柔動畫感";
+        els.voiceStatus.textContent = "英國腔朗讀";
       }
     };
     utterance.onerror = () => {
       if (runId === speechRunId) {
-        els.voiceStatus.textContent = "溫柔動畫感";
+        els.voiceStatus.textContent = "英國腔朗讀";
         els.feedback.textContent = "朗讀被中止，可以再點一次概念。";
       }
     };
@@ -812,23 +761,98 @@ function speakWithBrightVoice(text) {
 
 speak = speakWithBrightVoice;
 
-if ("speechSynthesis" in window) {
-  window.speechSynthesis.onvoiceschanged = () => {
-    populateVoiceSelect();
-  };
+function pickVoiceByLang(lang, fallbackPrefix) {
+  if (!("speechSynthesis" in window)) {
+    return null;
+  }
+
+  const voices = window.speechSynthesis.getVoices();
+  return voices.find((voice) => voice.lang === lang)
+    || voices.find((voice) => voice.lang.startsWith(fallbackPrefix))
+    || null;
 }
 
-if (els.voiceSelect) {
-  els.voiceSelect.addEventListener("change", () => {
-    if (els.voiceSelect.value) {
-      localStorage.setItem("ai900VoiceName", els.voiceSelect.value);
-      els.feedback.textContent = `已切換聲音：${els.voiceSelect.value}`;
-    } else {
-      localStorage.removeItem("ai900VoiceName");
-      els.feedback.textContent = "已改回自動選擇中文女聲。";
+function speakWithBritishSplitVoice(text) {
+  if (!("speechSynthesis" in window)) {
+    els.feedback.textContent = "這個瀏覽器不支援語音朗讀。";
+    return;
+  }
+
+  stopSpeech("準備英國腔朗讀...");
+  const runId = speechRunId;
+
+  speechTimer = window.setTimeout(() => {
+    if (runId !== speechRunId) {
+      return;
     }
-    stopSpeech(els.feedback.textContent);
-  });
+
+    speechTimer = null;
+    window.speechSynthesis.cancel();
+
+    const [englishPart, chinesePart = ""] = text.split("|||");
+    const britishVoice = pickPreferredVoice() || pickVoiceByLang("en-GB", "en");
+    const chineseVoice = pickVoiceByLang("zh-TW", "zh");
+    const voiceName = britishVoice ? `${britishVoice.name} (${britishVoice.lang})` : "瀏覽器預設聲音";
+
+    const speakOne = (content, voice, lang, onEnd) => {
+      const utterance = new SpeechSynthesisUtterance(content);
+      if (voice) {
+        utterance.voice = voice;
+        utterance.lang = voice.lang;
+      } else {
+        utterance.lang = lang;
+      }
+      utterance.rate = 0.9;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      utterance.onend = onEnd;
+      utterance.onerror = onEnd;
+      window.speechSynthesis.speak(utterance);
+    };
+
+    els.voiceStatus.textContent = "英國腔朗讀中";
+    els.feedback.textContent = `目前英文聲音：${voiceName}`;
+
+    speakOne(englishPart, britishVoice, "en-GB", () => {
+      if (runId !== speechRunId) {
+        return;
+      }
+
+      if (chinesePart.trim()) {
+        speakOne(chinesePart, chineseVoice, "zh-TW", () => {
+          if (runId === speechRunId) {
+            els.voiceStatus.textContent = "英國腔朗讀";
+          }
+        });
+      } else {
+        els.voiceStatus.textContent = "英國腔朗讀";
+      }
+    });
+  }, 160);
+}
+
+stopSpeech = function(message = "已停止朗讀。") {
+  speechRunId += 1;
+
+  if (speechTimer) {
+    window.clearTimeout(speechTimer);
+    speechTimer = null;
+  }
+
+  if ("speechSynthesis" in window) {
+    window.speechSynthesis.cancel();
+  }
+
+  els.voiceStatus.textContent = "英國腔朗讀";
+  els.feedback.textContent = message;
+};
+
+speak = speakWithBritishSplitVoice;
+
+if ("speechSynthesis" in window) {
+  window.speechSynthesis.onvoiceschanged = () => {
+    pickPreferredVoice();
+  };
 }
 
 els.stopBtn.addEventListener("click", () => {
@@ -843,5 +867,4 @@ window.addEventListener("beforeunload", () => {
 
 renderTopics();
 renderConcepts();
-populateVoiceSelect();
 selectConcept(0, false);
