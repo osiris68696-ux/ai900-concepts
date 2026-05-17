@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+    <title>AI-900 必考概念點讀</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="practice-panel" aria-labelledby="app-title">
+        <div class="topbar">
+          <div>
+            <p class="eyebrow">Microsoft Azure AI Fundamentals</p>
+            <h1 id="app-title">AI-900 必考概念點讀</h1>
+          </div>
+        </div>
+
+        <div class="status-grid" aria-label="目前概念狀態">
+          <div>
+            <span>分類</span>
+            <strong id="categoryText">AI 與機器學習生命週期</strong>
+          </div>
+          <div>
+            <span>英文名稱</span>
+            <strong id="englishText">Labeling / Labels</strong>
+          </div>
+          <div>
+            <span>模式</span>
+            <strong id="voiceStatus">點擊朗讀</strong>
+          </div>
+        </div>
+
+        <div class="question-area">
+          <p id="conceptCategory" class="question-number">AI 與機器學習生命週期</p>
+          <h2 id="conceptName">標記 / Labeling / Labels</h2>
+          <p id="conceptDescription" class="hint">幫訓練資料貼上標準答案的動作。有標記資料用於監督式學習，沒標記資料常用於非監督式學習。</p>
+        </div>
+
+        <div class="answer-box concept-actions">
+          <button id="speakCurrentBtn" class="primary" type="button">朗讀目前概念</button>
+          <button id="stopBtn" type="button">停止朗讀</button>
+        </div>
+
+        <div class="concept-list" id="conceptList" aria-label="AI-900 必考概念清單"></div>
+
+        <div id="feedback" class="feedback neutral" role="status" aria-live="polite">
+          點選任一概念，系統會念出英文名稱與中文說明。
+        </div>
+      </section>
+
+      <aside class="review-panel" aria-labelledby="review-title">
+        <h2 id="review-title">模組地圖</h2>
+        <div class="topic-list" id="topicList"></div>
+      </aside>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
