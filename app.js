@@ -144,6 +144,24 @@ const concepts = [
     description: "使用已訓練完成的模型，對新資料產生預測結果。"
   },
   {
+    category: "AI 與機器學習生命週期",
+    name: "監督式學習",
+    english: "Supervised Learning",
+    description: "使用已標記的訓練資料，讓模型學習輸入與輸出的對應關係，適用於分類與迴歸任務。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "非監督式學習",
+    english: "Unsupervised Learning",
+    description: "在未標記的資料中自動尋找規律或結構，最常見的應用是分群（Clustering）。"
+  },
+  {
+    category: "AI 與機器學習生命週期",
+    name: "F1 分數",
+    english: "F1 Score",
+    description: "精確率（Precision）與召回率（Recall）的調和平均值，在資料不平衡時比正確率更能反映模型真實效能。"
+  },
+  {
     category: "五大 AI 核心領域",
     name: "機器學習",
     english: "Machine Learning",
@@ -312,6 +330,24 @@ const concepts = [
     description: "知識採礦與智慧搜尋常用服務，可將文件內容索引成可搜尋的知識庫。"
   },
   {
+    category: "五大 AI 核心領域",
+    name: "語義分割",
+    english: "Semantic Segmentation",
+    description: "對圖像中每個像素進行分類，精確標出物件的完整輪廓，比物件偵測更細緻。"
+  },
+  {
+    category: "五大 AI 核心領域",
+    name: "命名實體辨識",
+    english: "Named Entity Recognition / NER",
+    description: "從文字中識別並分類結構化資訊，例如人名、地名、組織名稱、日期與金額等，是 NLP 的重要能力。"
+  },
+  {
+    category: "五大 AI 核心領域",
+    name: "命名實體辨識",
+    english: "Named Entity Recognition / NER",
+    description: "從文字中識別並分類結構化資訊，例如人名、地名、組織名稱、日期與金額。"
+  },
+  {
     category: "負責任 AI",
     name: "公平性",
     english: "Fairness",
@@ -346,6 +382,12 @@ const concepts = [
     name: "權責性",
     english: "Accountability",
     description: "設計或部署 AI 系統的人、團隊或企業，必須為系統決策與錯誤承擔最終責任。"
+  },
+  {
+    category: "負責任 AI",
+    name: "負責任 AI",
+    english: "Responsible AI",
+    description: "微軟提出的 AI 開發準則，涵蓋公平性、可靠性與安全性、隱私與安全性、包容性、透明度、問責六大原則。"
   },
   {
     category: "Azure ML 與 AI 服務工具箱",
@@ -628,15 +670,21 @@ const concepts = [
     name: "Azure AI Foundry 模型目錄",
     english: "Azure AI Foundry Model Catalog",
     description: "Azure AI Foundry 中用來瀏覽、比較、選擇與部署不同 AI 模型的模型目錄。"
+  },
+  {
+    category: "生成式 AI 與 Azure OpenAI",
+    name: "提示工程",
+    english: "Prompt Engineering",
+    description: "設計與優化輸入提示的技巧，包含角色設定、few-shot 範例與要求輸出格式，讓生成式 AI 產出更符合需求的結果。"
   }
 ];
 
 const topics = [
-  ["模組一", "AI 與機器學習生命週期：Labeling、Features、Data Splitting、Training、Validation、Test、Overfitting"],
-  ["模組二", "五大 AI 核心領域：Machine Learning、Computer Vision、NLP、Conversational AI、Knowledge Mining"],
+  ["模組一", "AI 與機器學習生命週期：Labeling、Features、Supervised / Unsupervised Learning、Data Splitting、Overfitting、Confusion Matrix、F1 Score、AUC"],
+  ["模組二", "五大 AI 核心領域：Machine Learning、Computer Vision、NLP、Semantic Segmentation、NER、Conversational AI、Knowledge Mining"],
   ["模組三", "Responsible AI：Fairness、Reliability and Safety、Privacy and Security、Inclusiveness、Transparency、Accountability"],
   ["模組四", "Azure ML 與 AI Services：AML Studio、Automated ML、Designer、Document Intelligence、Language、Speech"],
-  ["模組五", "Generative AI 與 Azure OpenAI：DALL-E、GPT、Temperature、RAG、Grounding、Content Filtering"]
+  ["模組五", "Generative AI 與 Azure OpenAI：DALL-E、GPT、Temperature、Prompt Engineering、RAG、Grounding、Content Filtering"]
 ];
 
 let activeIndex = 0;
